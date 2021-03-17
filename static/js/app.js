@@ -120,7 +120,7 @@ d3.json("samples.json").then((data) => {
         demoData.append('p').text(`${key} : ${value}`);
     });
 
-});
+};
 
 
 // Handler for change on test subject ID no dropdown
