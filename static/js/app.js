@@ -1,3 +1,17 @@
+// Define function to build plots
+function buildPlot(index, sampleData) {
+
+var dataPromise = d3.json(url);
+console.log("Data Promise: ", dataPromise);
+
+
+// Fetch the JSON data and console log it
+  d3.json(url).then(function(data) {
+  console.log("This is the first console log:");
+  console.log(data);
+});
+
+
 d3.json("samples.json").then((data) => {
     console.log(data);
     var sampleData = data;
@@ -15,12 +29,11 @@ d3.json("samples.json").then((data) => {
     d3.selectAll("#selDataset").on("change", optionChanged(dropdownMenu, sampleData));
 });
 
-// Define function to build plots
-function buildPlot(index, sampleData) {
+
 
     // Save needed data for plots to variables 
     var sample_values = sampleData.samples[index].sample_values;
-    console.log(sampleValue); 
+    console.log(sample_values); 
     var otu_ids = sampleData.samples[index].otu_ids;
     console.log(otu_ids);
     var otu_labels = sampleData.samples[index].otu_labels;
@@ -28,17 +41,17 @@ function buildPlot(index, sampleData) {
    
         
     // Get top 10 OTU ids and save to variable with correct format for plot
-    var topTenOTU = otu_ids.slice(0,10).reverse();
-    console.log(topTenOTU);
+    var ten_OTU = otu_ids.slice(0,10).reverse();
+    console.log(ten_OTU);
     
-    var topTenLabels = topTenOTU.map((otu => "OTU " + otu));
-    console.log(topTenLabels)
+    var ten_labels = ten_OTU.map((otu => "OTU " + otu));
+    console.log(ten_labels)
         
     // Create bar plot 
     // Bar Trace
     var barTrace = {
         x: sampleValue.slice(0,10).reverse(),
-        y: topTenLabels,
+        y: ten_labels,
         hovertext: otu_labels.slice(0,10).reverse(),
         type: "bar",
         orientation: "h",
@@ -65,12 +78,12 @@ function buildPlot(index, sampleData) {
     // Bubble Trace
     var bubbleTrace = {
         x: otu_ids,
-        y: sampleValue,
+        y: sample_values,
         text: otu_labels,
         mode: 'markers',
         marker: {
             color: otu_ids,
-            size: sampleValue,
+            size: sample_values,
         }
     };
         
@@ -107,31 +120,7 @@ function buildPlot(index, sampleData) {
         demoData.append('p').text(`${key} : ${value}`);
     });
 
-    idMetaData = sampleData.metadata[index]
-    console.log(idMetaData)
-
-    var result = sampleData.metadata.filter(meta => meta.id.toString === index)[0];
-    console.log(idMetaData) - comes back undefined
-    Object.entries(result).forEach((key)=> {
-        demoData.append('p').text(key[0].toUpperCase() + ": " + key[1] + "\n");
-    });
-
-    var selection = demoData
-    Object.entries(idMetaData).forEach(([key, value])=> {
-        demoData.append("p").text("${key} : ${value}");
-    });
-    })
-    sampleData.metadata.forEach(function(meta){
-        demoData.append("p").text("${demoKeys[i]}: ${demoValues[i]}");
-
-    // // Append demographic data to demographics section of html
-    for (var i=0; i < demoKeys.length; i++) {
-        demoData.append("p").text("${demoKeys}: ${demoValues}");
-    };
-};
-
-// Handler and listener for capturing user input
-// Add event listener for test subject ID dropdown
+});
 
 
 // Handler for change on test subject ID no dropdown
@@ -198,15 +187,4 @@ function optionChanged(dropdownMenu){
     // };
 
     // Plotly.newPlot("gauge", gaugeData, gaugeLayout)
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
