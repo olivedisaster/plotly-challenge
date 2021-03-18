@@ -1,21 +1,6 @@
-// Define function to build plots
-function buildPlot(index, sampleData) {
-
-var dataPromise = d3.json(url);
-console.log("Data Promise: ", dataPromise);
-
-
-// Fetch the JSON data and console log it
-  d3.json(url).then(function(data) {
-  console.log("This is the first console log:");
-  console.log(data);
-});
-
-
-d3.json("samples.json").then((data) => {
-    console.log(data);
+d3.json("../samples.json").then((data) => {
     var sampleData = data;
-
+        
     var dropdownMenu = d3.select("#selDataset");
 
     sampleData.names.forEach(function(name){
@@ -31,6 +16,8 @@ d3.json("samples.json").then((data) => {
 
 
 
+// 1. Create the buildCharts function.
+function buildPlot(index, sampleData) {
     // Save needed data for plots to variables 
     var sample_values = sampleData.samples[index].sample_values;
     console.log(sample_values); 
@@ -38,9 +25,7 @@ d3.json("samples.json").then((data) => {
     console.log(otu_ids);
     var otu_labels = sampleData.samples[index].otu_labels;
     console.log(otu_labels);
-   
-        
-    // Get top 10 OTU ids and save to variable with correct format for plot
+
     var ten_OTU = otu_ids.slice(0,10).reverse();
     console.log(ten_OTU);
     
@@ -122,10 +107,8 @@ d3.json("samples.json").then((data) => {
 
 };
 
-
-// Handler for change on test subject ID no dropdown
 function optionChanged(dropdownMenu){
-    d3.json("samples.json").then((data) => {
+    d3.json("../samples.json").then((data) => {
         console.log(data);
         var sampleData = data;
     
@@ -143,6 +126,85 @@ function optionChanged(dropdownMenu){
         };
     });
 };
+  // 2. Use d3.json to load and retrieve the samples.json file 
+  
+    // 3. Create a variable that holds the samples array. 
+
+    // 4. Create a variable that filters the samples for the object with the desired sample number.
+
+    //  5. Create a variable that holds the first sample in the array.
+
+
+    // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
+
+
+    // 7. Create the yticks for the bar chart.
+    // Hint: Get the the top 10 otu_ids and map them in descending order  
+    //  so the otu_ids with the most bacteria are last. 
+
+//     var yticks = 
+
+//     // 8. Create the trace for the bar chart. 
+//     var barData = [
+      
+//     ];
+//     // 9. Create the layout for the bar chart. 
+//     var barLayout = {
+     
+//     };
+//     // 10. Use Plotly to plot the data with the layout. 
+    
+//   });
+// }
+
+//     var dropdownMenu = d3.select("#selDataset");
+
+//     sampleData.names.forEach(function(name){
+//         dropdownMenu.append("option").text(name).property("value");
+//     });
+
+//     buildPlot(0, sampleData);
+//     console.log("here is sampledata")
+//     console.log(sampleData)
+//     console.log(dropdownMenu)
+//     d3.selectAll("#selDataset").on("change", optionChanged(dropdownMenu, sampleData));
+// });
+
+
+
+//     // // Save needed data for plots to variables 
+//     // var sample_values = sampleData.samples[index].sample_values;
+//     // console.log(sample_values); 
+//     // var otu_ids = sampleData.samples[index].otu_ids;
+//     // console.log(otu_ids);
+//     // var otu_labels = sampleData.samples[index].otu_labels;
+//     // console.log(otu_labels);
+   
+        
+//     // Get top 10 OTU ids and save to variable with correct format for plot
+    
+
+
+// // Handler for change on test subject ID no dropdown
+// function optionChanged(dropdownMenu){
+//     d3.json("samples.json").then((data) => {
+//         console.log(data);
+//         var sampleData = data;
+    
+//         console.log(d3.event);
+//         console.log("options changed function")
+//         // d3.event.preventDefault();
+//         console.log(dropdownMenu)
+//         var testSubjectID = dropdownMenu
+//         console.log(testSubjectID);
+//         console.log(sampleData);
+//         for (var i=0; i < sampleData.names.length; i++) {
+//             if (testSubjectID === sampleData.names[i]){
+//                 buildPlot(i, sampleData);
+//             };
+//         };
+//     });
+// };
 
 
 
@@ -188,3 +250,55 @@ function optionChanged(dropdownMenu){
 
     // Plotly.newPlot("gauge", gaugeData, gaugeLayout)
 
+// var url = "../../data/samples.json"
+// // Define function to build plots
+// function buildPlot(index, sampleData) {
+
+    // var dataPromise = d3.json(url);
+    // console.log("Data Promise: ", dataPromise);
+    
+    // Save needed data for plots to variables 
+    // var sample_values = sampleData.samples[index].sample_values;
+    // console.log(sample_values); 
+    // var otu_ids = sampleData.samples[index].otu_ids;
+    // console.log(otu_ids);
+    // var otu_labels = sampleData.samples[index].otu_labels;
+    // console.log(otu_labels);
+    
+    
+    // Fetch the JSON data and console log it
+    //   d3.json(url).then(function(data) {
+    //   console.log("This is the first console log:");
+    //   console.log(data);
+    // });
+    // function init() {
+    //     // Grab a reference to the dropdown select element
+    //     var selector = d3.select("#selDataset");
+      
+    //     // Use the list of sample names to populate the select options
+    //     d3.json("samples.json").then((data) => {
+    //       var sampleNames = data.names;
+      
+    //       sampleNames.forEach((sample) => {
+    //         selector
+    //           .append("option")
+    //           .text(sample)
+    //           .property("value", sample);
+    //       });
+      
+    //       // Use the first sample from the list to build the initial plots
+    //       var firstSample = sampleNames[0];
+    //       buildCharts(firstSample);
+    //       buildMetadata(firstSample);
+    //     });
+    //   }
+      
+    //   // Initialize the dashboard
+    //   init();
+
+    // function optionChanged(newSample) {
+//   // Fetch new data each time a new sample is selected
+//   buildMetadata(newSample);
+//   buildCharts(newSample);
+  
+// }
