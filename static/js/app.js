@@ -35,7 +35,7 @@ function buildPlot(index, sampleData) {
     // Create bar plot 
     // Bar Trace
     var barTrace = {
-        x: sampleValue.slice(0,10).reverse(),
+        x: sample_values.slice(0,10).reverse(),
         y: ten_labels,
         hovertext: otu_labels.slice(0,10).reverse(),
         type: "bar",
